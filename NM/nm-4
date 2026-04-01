@@ -1,0 +1,27 @@
+# Loading data
+data<-read.csv("D:/PRACTICALS/PG/DataMining2023_24/STUDENT.csv")
+# Structure
+str(data)
+head(data,n=15)
+# Loading packages
+library(class)
+library(e1071)
+library(caTools)
+# Splitting data into train and test data
+split <- sample.split(data, SplitRatio = 0.5)
+train_cl <- subset(data, split == "TRUE")
+test_cl <- subset(data, split == "FALSE")
+# Feature Scaling
+train_scale <- scale(train_cl[, 2:3])
+test_scale <- scale(test_cl[, 2:3])
+head(train_scale,n=15)
+head(test_scale,n=15)
+# Fitting KNN Model to training dataset
+classifier_knn <- knn(train = train_scale,
+test = test_scale,
+cl = train_cl$MODEL_NAME,
+k = 1)
+classifier_knn
+# Confusiin Matrix
+cm <- table(test_cl$MODEL_NAME, classifier_knn)
+cm

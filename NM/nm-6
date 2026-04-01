@@ -1,0 +1,17 @@
+#Loading data
+sal_data<-read.csv("D:/PRACTICALS/PG/DataMining2023_24/SAL.csv")
+str(sal_data) # Structure
+# Create the scatter plot
+plot(data$EXPERIENC, data$SALARY,
+xlab = "Years Experienced",
+ylab = "Salary",
+main = "Scatter Plot of Years Experienced vs Salary")
+# Fitting Simple Linear Regression to the Training set
+lm.r= lm(formula = SALARY ~ EXPERIENCE, data = sal_data)
+summary(lm.r) # Summary of the model
+# Create a data frame with new input values
+new_data <- data.frame(EXPERIENCE = c(4.0, 4.5, 5.0))
+# Predict using the linear regression model
+predicted_salaries <- predict(lm.r, newdata = new_data)
+# Display the predicted salaries
+print(predicted_salaries)

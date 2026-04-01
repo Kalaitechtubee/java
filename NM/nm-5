@@ -1,0 +1,31 @@
+# Loading packages
+library(data.tree) # make decision tree using
+library(rpart) # use prp function to draw decision tree
+library(rpart.plot)
+library(dplyr) # format data
+library(caTools) # use sample.split function
+library(party) # use ctree function to model data
+data<-iris # Loading data
+str(data) # Structure
+head(data) # print 6 rows
+#build the initial decision tree
+tree <- rpart(Species ~ ., data, control=rpart.control(cp=.0001))
+#identify best cp value to use
+best <- tree$cptable[which.min(tree$cptable[,"xerror"]),"CP"]
+#produce a pruned tree based on the best cp value
+pruned_tree <- prune(tree, cp=best)
+prp(pruned_tree) #plot the pruned tree
+# Splitting data into train and test data
+split <- sample.split(data, SplitRatio = 0.4)
+train_data <- subset(data, split == "TRUE")
+test_data <- subset(data, split == "FALSE")
+train_data$Species<-as.factor(train_data$Species)
+summary(train_data)
+summary(test_data)
+model<- ctree(Species ~ ., train_data) # Test DT based on train data
+plot(model) #plot(model)
+# apply test data on contructed decision tree
+predict_model<-predict(model, test_data)
+# creates a table to count how many are classified correctly
+m_at <- table(test_data$Species, predict_model)
+m_at

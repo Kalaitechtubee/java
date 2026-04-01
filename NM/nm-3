@@ -1,0 +1,19 @@
+# Load the data
+data("USArrests")
+# Setting seed
+set.seed(240)
+# Finding distance matrix
+distance_mat <- dist(USArrests, method = 'euclidean')
+as.matrix(distance_mat)[1:6, 1:6]
+# Fitting Hierarchical clustering Model to training dataset
+Hierar_cl <- hclust(distance_mat, method = "complete")
+Hierar_cl
+# Plotting dendrogram
+# cex: label size
+library("factoextra")
+fviz_dend(Hierar_cl, cex = 0.5)
+sub_grp <- cutree(Hierar_cl, k = 5)
+# Number of members in each cluster
+table(sub_grp)
+plot(Hierar_cl, cex = 0.6)
+rect.hclust(Hierar_cl, k = 5, border = 2:5)
