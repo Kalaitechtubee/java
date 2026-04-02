@@ -1,0 +1,89 @@
+Types of Data Visualizations:
+1. Bar Plot
+2. Histogram
+3. Box Plot
+4. Scatter Plot
+5. Heat Map
+6. Map visualization
+7. 3D Graphs
+
+1. BAR PLOT
+Program: Vertical Bar Plot
+#Loading data
+sal_data<-read.csv("D:/PRACTICALS/PG/DataMining2023_24/SAL.csv")
+barplot(sal_data$SALARY,
+main = 'SALARY DATA',
+xlab = 'SALARY LEVELS', horiz = FALSE)
+
+Program: Horizontal Bar Plot
+#Loading data
+sal_data<-read.csv("D:/PRACTICALS/PG/DataMining2023_24/SAL.csv")
+barplot(sal_data$SALARY,
+main = 'SALARY DATA',
+xlab = 'SALARY LEVELS', horiz = TRUE)
+
+2. HISTOGRAM
+Program:
+#Loading data
+sal_data<-read.csv("D:/PRACTICALS/PG/DataMining2023_24/SAL.csv")
+hist(sal_data$SALARY, main ="SALARY DETAIL BASED ON EXPEREINCE",
+xlab ="SALARY(INR)",
+xlim = c(30000, 100000), col ="yellow",
+freq = TRUE)
+
+3. BOX PLOT
+Program:
+#Loading data
+sal_data<-read.csv("D:/PRACTICALS/PG/DataMining2023_24/SAL.csv")
+boxplot(sal_data$SALARY, main = "AVERAGE SALARY",
+xlab = "SALARY BASED ON EXPERIENCE", ylab = "SALARY",
+col = "orange", border = "brown",
+horizontal = TRUE, notch = TRUE)
+
+4. SCATTER PLOT
+Program:
+#Loading data
+sal_data<-read.csv("D:/PRACTICALS/PG/DataMining2023_24/SAL.csv")
+plot(sal_data$SALARY, sal_data$EXPERIENCE,
+main ="Scatterplot Example",
+xlab ="SALARY",
+ylab =" EXPEREINCE ", pch = 19)
+
+5. HEAT MAP
+Program:
+# Create example data
+data <- matrix(rnorm(50, 0, 5), nrow = 5, ncol = 5)
+# Column names
+colnames(data) <- paste0("col", 1:5)
+rownames(data) <- paste0("row", 1:5)
+# Draw a heatmap
+heatmap(data)
+
+6. MAP VISUALIZATION
+Program:
+# Read dataset and convert it into
+# Dataframe
+data <- read.csv("D:/PRACTICALS/PG/DataMining2023_24/WORLD_CITIES.csv")
+df <- data.frame(data)
+# Load the required libraries
+library(maps)
+map(database = "world")
+# marking points on map
+points(x = df$lat[1:500], y = df$lng[1:500], col = "Red")
+
+7. 3-D GRAPHS
+Program:
+# plot the 3D surface
+cone <- function(x, y)
+{
+sqrt(x ^ 2 + y ^ 2)
+}
+# prepare variables.
+x<-seq(-1,1,length=30)
+y<-seq(-1,1,length=30)
+z <- outer(x,y,cone)
+persp(x, y, z,
+main="Perspective Plot of a Cone",
+zlab = "Height",
+theta = 30, phi = 15,
+col = "orange", shade = 0.4)
